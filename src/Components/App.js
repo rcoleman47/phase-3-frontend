@@ -1,4 +1,4 @@
-import { Routes, Route, Redirect } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { UserProvider } from '../Context/user';
 // import "bootstrap/dist/css/bootstrap.min.css";
 import Login from './Login'
