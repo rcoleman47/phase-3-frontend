@@ -12,17 +12,17 @@ export default function Project({project}) {
       const {number, unit, cost_per_unit, description, subcontracted, total, id } = item
       return(
         <tr key={id}>
-        <td>{number}</td>
-        <td>{unit}</td>
-        <td>{cost_per_unit}</td>
-        <td>{description}</td>
-        <td>{subcontracted}</td>
-        <td>{total}</td>
-      </tr>
-      )
-    })
-      )
-  }
+          <td>{number}</td>
+          <td>{unit}</td>
+          <td>{cost_per_unit}</td>
+          <td>{description}</td>
+          <td>{subcontracted}</td>
+          <td>{total}</td>
+        </tr>
+        );
+      })
+    );
+  };
   return (
     <div>
       <h2>{title}</h2>
@@ -53,5 +53,5 @@ export default function Project({project}) {
         </thead>
       </table>
     </div>
-  )
-}
+  );
+};

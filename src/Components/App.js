@@ -8,7 +8,6 @@ import GCUser from './GCUser';
 import Portfolio from './Portfolio';
 import Projects from './Projects';
 import NewProjectForm from './NewProjectForm';
-import Estimate from './Estimate';
 import NewEstimateForm from './NewEstimateForm';
 
 
@@ -19,8 +18,9 @@ function App() {
 
   const addNewProject = (project) => {
     const updatedProjects = [...projects, project];
+    
     setTimeout(setProjects(updatedProjects),0);
-  }
+  };
   
   return (
     <UserProvider>
@@ -30,12 +30,11 @@ function App() {
         <Route path=":companyName" element={<GCUser />}>
           <Route path="portfolio" element={<Portfolio 
             projects={projects} />}/>
-
           <Route path="projects" element={<Projects 
             projects={projects} />}>
-
-          </Route>
-          <Route path="projects/new" element={<NewProjectForm addNewProject={addNewProject} />}/>
+        </Route>
+          <Route path="projects/new" element={<NewProjectForm 
+            addNewProject={addNewProject} />}/>
           <Route path="estimate/new" element={<NewEstimateForm />}/>
         </Route>
       </Routes>

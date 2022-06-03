@@ -30,14 +30,9 @@ export default function NewProjectForm({addNewProject}) {
       [key]: value,
     });
   };
-  console.log(newProjectForm)
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const handleResponse = (project) => {
-      setTimeout(() => addNewProject(project))
-    }
 
     fetch("http://127.0.0.1:9393/project", {
       method: "POST",
@@ -47,9 +42,9 @@ export default function NewProjectForm({addNewProject}) {
       body: JSON.stringify(newProjectForm)
     })
     .then(r=>r.json())
-    .then(project=> handleResponse(project));
+    .then(project=> addNewProject(project));
     
-    //navigate(`/${(generalContractor.company_name).split(' ').join('')}/estimate/new`);
+    navigate(`/${(generalContractor.company_name).split(' ').join('')}/estimate/new`);
     
     setNewProjectForm({
       title: '',
@@ -70,40 +65,81 @@ export default function NewProjectForm({addNewProject}) {
       <form onSubmit={handleSubmit} >
         <div>
           <label>Project Title</label>
-          <input onChange={handleChange} name="title" type="text" placeholder="Enter project title..." value={title} required/>
+          <input 
+          onChange={handleChange} 
+          name="title" type="text" placeholder="Enter project title..." value={title} required/>
         </div>
         <div>
           <label>Sector</label>
-          <input onChange={handleChange} name="sector" type="text" placeholder="Enter sector..." value={sector} required/>
+          <input 
+          onChange={handleChange} 
+          name="sector" 
+          type="text" 
+          placeholder="Enter sector..." 
+          value={sector} 
+          required/>
         </div>
         <div>
           <label>Description</label>
-          <input onChange={handleChange} name="description" type="text" placeholder="Enter description..." value={description} required/>
+          <input 
+          onChange={handleChange} 
+          name="description" 
+          type="text" 
+          placeholder="Enter description..." 
+          value={description} 
+          required/>
         </div>
         <div>
           <label>Location</label>
-          <input onChange={handleChange} name="location" type="text" placeholder="Enter Location..." value={location} required/>
+          <input 
+          onChange={handleChange} 
+          name="location" 
+          type="text" 
+          placeholder="Enter Location..." 
+          value={location} 
+          required/>
         </div>
         <div>
           <label>Start Date</label>
-          <input onChange={handleChange} name="start_date" type="date" placeholder="YYYY-DD-MM" value={start_date} required/>
+          <input 
+          onChange={handleChange} 
+          name="start_date" 
+          type="date" 
+          placeholder="YYYY-DD-MM" 
+          value={start_date} 
+          required/>
         </div>
         <div>
           <label>Duration</label>
-          <input onChange={handleChange} name="duration" type="number" placeholder="Enter Duration in weeks.." value={Number(duration)} required/>
+          <input 
+          onChange={handleChange} 
+          name="duration" type="number" 
+          placeholder="Enter Duration in weeks.." 
+          value={Number(duration)} 
+          required/>
         </div>
         <div>
           <label>Phase</label>
-          <input onChange={handleChange} name="phase" type="text" placeholder="Enter phase..." value={phase} required/>
+          <input 
+          onChange={handleChange} 
+          name="phase" type="text" 
+          placeholder="Enter phase..." 
+          value={phase} 
+          required/>
         </div>
         <div>
           <label>Size</label>
-          <input onChange={handleChange} name="size" type="number" placeholder="Enter size in sf.." value={Number(size)} required/>
+          <input 
+          onChange={handleChange} 
+          name="size" type="number" 
+          placeholder="Enter size in sf.." 
+          value={Number(size)} 
+          required/>
         </div>
         <div>
           <input type="Submit" name="Submit"/>
         </div>
       </form>
     </div>
-  )
-}
+  );
+};

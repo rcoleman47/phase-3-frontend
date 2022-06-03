@@ -1,8 +1,5 @@
 export default function Portfolio({projects}) {
 
-  console.log(projects)
-
-
   const renderPortfolio = () => projects.map(p =>{
     const {title, location, description, sector, total_cost, id} = p;
     
@@ -14,8 +11,8 @@ export default function Portfolio({projects}) {
         <td>{sector}</td>
         <td>{total_cost}</td>
       </tr>
-    )
-  })
+    );
+  });
 
   return (
     <div>
@@ -35,5 +32,5 @@ export default function Portfolio({projects}) {
         </tbody>
       </table>
     </div>
-  )
-}
+  );
+};

@@ -7,7 +7,7 @@ import {useNavigate} from 'react-router-dom';
 export default function GCUser() {
   const {setIsLoggedIn, generalContractor, setGeneralContractor} = useContext(UserContext);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleClick = () => {
     navigate("/");
@@ -19,7 +19,7 @@ export default function GCUser() {
       email: '',
       password_digest: ''
     });
-  }
+  };
 
   return (
     <div>
@@ -31,7 +31,6 @@ export default function GCUser() {
         <NavLink to="projects/new">Start New Project</NavLink>
       </div>
       <Outlet />
-
     </div>
-  )
-}
+  );
+};

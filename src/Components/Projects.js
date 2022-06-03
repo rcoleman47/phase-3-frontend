@@ -2,8 +2,10 @@ import {useState} from 'react'
 import Project from './Project'
 
 export default function Projects({projects}) {
-  const [project, setProject] =useState(projects[0])
+  const [project, setProject] =useState(projects[0]);
+
   console.log(projects)
+
   const renderSelecions = projects.sort((a,b)=>{return a.title.localeCompare(b.title)})
   .map(p => {
     return(
@@ -18,7 +20,8 @@ export default function Projects({projects}) {
       return p.title === e.target.value
     })
     setProject(a[0])
-  }
+  };
+  
   console.log(project)
 
   return (
