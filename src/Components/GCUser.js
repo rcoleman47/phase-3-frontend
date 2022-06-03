@@ -1,11 +1,11 @@
 import React, {useContext} from 'react'
 import {NavLink, Outlet} from 'react-router-dom';
 import {UserContext} from '../Context/user';
-import {Link, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 
 export default function GCUser() {
-  const {isLoggedIn, setIsLoggedIn, generalContractor, setGeneralContractor} = useContext(UserContext);
+  const {setIsLoggedIn, generalContractor, setGeneralContractor} = useContext(UserContext);
 
   const navigate = useNavigate()
 
@@ -23,11 +23,11 @@ export default function GCUser() {
 
   return (
     <div>
-      <h1>GC Name</h1>
+      <h1>{generalContractor.company_name}</h1>
       <button onClick={handleClick} >Log Out</button>
       <div>
         <NavLink to="Portfolio">Portfolio</NavLink>
-        <NavLink to="projects">Projects</NavLink>
+        <NavLink to="projects/">Projects</NavLink>
         <NavLink to="projects/new">Start New Project</NavLink>
       </div>
       <Outlet />

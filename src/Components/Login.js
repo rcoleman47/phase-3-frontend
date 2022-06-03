@@ -1,8 +1,8 @@
-import React, {useState, useContext, useEffect} from 'react'
-import {UserContext} from "../Context/user"
+import React, {useState, useContext} from 'react'
+import {UserContext} from '../Context/user'
 import {Link, useNavigate} from 'react-router-dom'
 
-export default function Login () {
+export default function Login ({setProjects}) {
   const [formData, setFormData] =useState({
     email: '',
     password_digest: ''
@@ -16,10 +16,12 @@ export default function Login () {
     e.preventDefault();
 
     const handleResponse = (r) => {
-      console.log(r)
+      const {projects} = r
+      console.log(projects)
       if (typeof r === "object") {
         setGeneralContractor(r)
         setIsLoggedIn(true)
+        setProjects(projects)
         setFormData({
           email: '',
           password_digest: ''
@@ -41,11 +43,6 @@ export default function Login () {
     .then(r=>r.json())
     .then(r=> handleResponse(r));
   }
-  
-  const nav = () => {
-    if (isLoggedIn === true) {
-      navigate(`/${(generalContractor.company_name).split(' ').join('')}/portfolio`)
-  }}
 
   const handleChange = (e) => {
     let value = e.target.value
@@ -54,9 +51,12 @@ export default function Login () {
       ...formData,
       [key]: value
     })
-    console.log(generalContractor)
   }
-  console.log(formData)
+
+  const nav = () => {
+    if (isLoggedIn === true) {
+      navigate(`/${(generalContractor.company_name).split(' ').join('')}/portfolio`)
+  }}
   nav()
 
   return (
