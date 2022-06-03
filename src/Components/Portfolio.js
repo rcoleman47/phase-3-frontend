@@ -10,6 +10,12 @@ export default function Portfolio({projects}) {
         <td>{description}</td>
         <td>{sector}</td>
         <td>{total_cost}</td>
+        <td>
+        <button>Edit</button>
+        </td>
+        <td>
+        <button>Delete</button>
+        </td>
       </tr>
     );
   });

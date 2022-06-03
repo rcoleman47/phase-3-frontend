@@ -8,7 +8,9 @@ export default function Project({project}) {
   
   const renderBudget = () => {
     
-    return (budget_items.map(item => {
+    return (budget_items
+      .sort((a,b)=>{return a.description.localeCompare(b.description)})
+      .map(item => {
       const {number, unit, cost_per_unit, description, subcontracted, total, id } = item
       return(
         <tr key={id}>

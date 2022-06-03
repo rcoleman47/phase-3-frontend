@@ -6,7 +6,8 @@ export default function Projects({projects}) {
 
   console.log(projects)
 
-  const renderSelecions = projects.sort((a,b)=>{return a.title.localeCompare(b.title)})
+  const renderSelecions = projects
+  .sort((a,b)=>{return a.title.localeCompare(b.title)})
   .map(p => {
     return(
     <option 
@@ -21,7 +22,7 @@ export default function Projects({projects}) {
     })
     setProject(a[0])
   };
-  
+
   console.log(project)
 
   return (
