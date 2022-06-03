@@ -8,36 +8,59 @@ import GCUser from './GCUser';
 import Portfolio from './Portfolio';
 import Projects from './Projects';
 import NewProjectForm from './NewProjectForm';
-import NewEstimateForm from './NewEstimateForm';
-
-
-
+import EditProjectForm from './EditProjectForm';
 
 function App() {
   const [projects, setProjects] = useState({});
+  const [editProjectForm, setEditProjectForm] = useState({});
 
   const addNewProject = (project) => {
     const updatedProjects = [...projects, project];
     
-    setTimeout(setProjects(updatedProjects),0);
+    setProjects(updatedProjects);
   };
+
+  const editProject = (updatedProject) =>{
+    const updatedProjectList = [...projects].map(project => {
+      if(project.id === updatedProject.id){
+        return updatedProject
+      } else {return project}
+    })
+    setProjects(updatedProjectList);
+  };
+
+  const deleteProject = (deletedProject) => {
+    const updatedProjectList = [...projects].map(project => project !== deletedProject);
+    setProjects(updatedProjectList);
+  }
   
   return (
     <UserProvider>
+      <div id="appBody">
       <Routes>
         <Route path="/" element={<Login setProjects={setProjects} />} />
         <Route path="signup" element={<SignUp />}/>
         <Route path=":companyName" element={<GCUser />}>
           <Route path="portfolio" element={<Portfolio 
-            projects={projects} />}/>
+            projects={projects}
+            setProjects={setProjects} 
+            setEditProjectForm={setEditProjectForm} 
+            />}/>
           <Route path="projects" element={<Projects 
-            projects={projects} />}>
-        </Route>
+            projects={projects} 
+            setProjects={setProjects}
+            deleteProject={deleteProject}
+            />}/>
           <Route path="projects/new" element={<NewProjectForm 
             addNewProject={addNewProject} />}/>
-          <Route path="estimate/new" element={<NewEstimateForm />}/>
+          <Route path="project/edit" element={<EditProjectForm
+          setEditProjectForm={setEditProjectForm} 
+          editProjectForm={editProjectForm} 
+          editProject={editProject}
+          />}/>
         </Route>
       </Routes>
+      </div>
     </UserProvider>
   )
   

@@ -1,23 +1,12 @@
-import {useState, useContext} from 'react';
+import {useContext} from 'react';
 import {UserContext} from '../Context/user';
 import {useNavigate} from 'react-router-dom';
 
-export default function NewProjectForm({addNewProject}) {
+
+export default function EditProjectForm({editProjectForm, setEditProjectForm, editProject}) {
   const {generalContractor} = useContext(UserContext);
-  const [newProjectForm, setNewProjectForm] = useState({
-    title: '',
-    location: '',
-    description: '',
-    sector: '',
-    phase: 'Pre-Construction',
-    size: '',
-    duration: 0,
-    start_date: '',
-    general_contractor_id: generalContractor.id
-  });
 
-
-  const {title, location, description, sector, phase, size, duration, start_date} = newProjectForm;
+  const {title, location, description, sector, phase, size, duration, start_date, id} = editProjectForm;
 
   const navigate = useNavigate();
 
@@ -25,8 +14,8 @@ export default function NewProjectForm({addNewProject}) {
     const key = e.target.name;
     const value = e.target.value;
 
-    setNewProjectForm({
-      ...newProjectForm,
+    setEditProjectForm({
+      ...editProjectForm,
       [key]: value,
     });
   };
@@ -34,19 +23,19 @@ export default function NewProjectForm({addNewProject}) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch("http://127.0.0.1:9393/project", {
-      method: "POST",
+    fetch(`http://127.0.0.1:9393/projects/${id}`, {
+      method: "PATCH",
       headers: {
         "content-type": "application/json"
       },
-      body: JSON.stringify(newProjectForm)
+      body: JSON.stringify(editProjectForm)
     })
     .then(r=>r.json())
-    .then(project=> addNewProject(project));
+    .then(project=> editProject(project));
     
     setTimeout(navigate(`/${(generalContractor.company_name).split(' ').join('')}/portfolio`),0);
     
-    setNewProjectForm({
+    setEditProjectForm({
       title: '',
       location: '',
       description: '',
@@ -58,7 +47,6 @@ export default function NewProjectForm({addNewProject}) {
       general_contractor_id: generalContractor.id
     });
   };
-  
 
   return (
     <div>
@@ -141,5 +129,5 @@ export default function NewProjectForm({addNewProject}) {
         </div>
       </form>
     </div>
-  );
-};
+  )
+}

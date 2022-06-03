@@ -1,6 +1,6 @@
-import React, {useState, useContext} from 'react'
-import {UserContext} from '../Context/user'
-import {Link, useNavigate} from 'react-router-dom'
+import React, {useState, useContext} from 'react';
+import {UserContext} from '../Context/user';
+import {Link, useNavigate} from 'react-router-dom';
 
 export default function Login ({setProjects}) {
   const [formData, setFormData] = useState({
@@ -17,7 +17,7 @@ export default function Login ({setProjects}) {
 
     const handleResponse = (r) => {
       const {projects} = r
-      console.log(projects)
+  
       if (typeof r === "object") {
         setGeneralContractor(r)
         setIsLoggedIn(true)

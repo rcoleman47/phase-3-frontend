@@ -25,7 +25,7 @@ export default function GCUser() {
     <div>
       <h1>{generalContractor.company_name}</h1>
       <button onClick={handleClick} >Log Out</button>
-      <div>
+      <div className="navbar">
         <NavLink to="Portfolio">Portfolio</NavLink>
         <NavLink to="projects/">Projects</NavLink>
         <NavLink to="projects/new">Start New Project</NavLink>

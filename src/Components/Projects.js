@@ -1,10 +1,23 @@
-import {useState} from 'react'
-import Project from './Project'
+import {useState, useEffect, useContext} from 'react';
+import {UserContext} from '../Context/user';
+import Project from './Project';
 
-export default function Projects({projects}) {
+export default function Projects({projects, setProjects,deleteProject}) {
   const [project, setProject] =useState(projects[0]);
 
-  console.log(projects)
+  const {generalContractor} = useContext(UserContext)
+
+  useEffect(()=> {
+    fetch("http://127.0.0.1:9393/projects", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({id: generalContractor.id})
+    })
+    .then(r=>r.json())
+    .then(r=> setProjects(r));
+  },[])
 
   const renderSelecions = projects
   .sort((a,b)=>{return a.title.localeCompare(b.title)})
@@ -13,7 +26,8 @@ export default function Projects({projects}) {
     <option 
     key={p.id} 
     value={p.title}>
-      {p.title}</option>
+      {p.title}
+      </option>
   )});
   
   const handleChange = (e) => {
@@ -23,14 +37,12 @@ export default function Projects({projects}) {
     setProject(a[0])
   };
 
-  console.log(project)
-
   return (
     <div>
       <select onChange={handleChange}>
         {renderSelecions}
       </select>
-      <Project project={project} />
+      <Project project={project} deleteProject={deleteProject} />
     </div>
   )
 }
